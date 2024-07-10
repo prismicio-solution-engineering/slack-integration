@@ -10,9 +10,9 @@ export async function POST(request: Request) {
     const publishedDocs = await client.getByIDs(impactedDocs)
     const publishedDocsResults = publishedDocs.results
     const publishedDocsIds = publishedDocs.results.map(doc => doc.id)
-    const publishedDocsText = publishedDocsIds.length > 0 ? ":white_check_mark: Published decks :\n" + publishedDocsResults.map(doc => "- <https://slice-deck.prismic.io/builder/pages/" + doc.id + "?s=published|" + prismicClient.asText(doc.data.title) + ">\n") : undefined
+    const publishedDocsText = publishedDocsIds.length > 0 ? ":white_check_mark: Published deck :\n" + publishedDocsResults.map(doc => "- <https://slice-deck.prismic.io/builder/pages/" + doc.id + "?s=published|" + prismicClient.asText(doc.data.title) + ">\n") : undefined
     const unpublishedDocsIds = impactedDocs.filter((doc: string) => !publishedDocsIds.includes(doc))
-    const unpublishedDocsText = unpublishedDocsIds.length > 0 ? ":x: Unpublished decks :\n" + unpublishedDocsIds.map((id: string)  => "- <https://slice-deck.prismic.io/builder/pages/" + id + "?s=archived|" + id + ">\n") : undefined
+    const unpublishedDocsText = unpublishedDocsIds.length > 0 ? ":x: Unpublished deck :\n" + unpublishedDocsIds.map((id: string)  => "- <https://slice-deck.prismic.io/builder/pages/" + id + "?s=archived|" + id + ">\n") : undefined
     const fields = [
       publishedDocsText &&
       {
