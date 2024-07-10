@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const publishedDocsIds = publishedDocs.results.map(doc => doc.id)
     const publishedDocsText = publishedDocsIds.length > 0 ? ":white_check_mark: Published decks :\n" + publishedDocsResults.map(doc => "- <https://slice-deck.prismic.io/builder/pages/" + doc.id + "?s=published|" + prismicClient.asText(doc.data.title) + ">\n") : undefined
     const unpublishedDocsIds = impactedDocs.filter((doc: string) => !publishedDocsIds.includes(doc))
-    const unpublishedDocsText = unpublishedDocsIds.length > 0 ? ":x: Unpublished decks :\n" + unpublishedDocsIds.map((doc: { id: string }) => "- <https://slice-deck.prismic.io/builder/pages/" + doc.id + "?s=archived|" + doc.id + ">\n") : undefined
+    const unpublishedDocsText = unpublishedDocsIds.length > 0 ? ":x: Unpublished decks :\n" + unpublishedDocsIds.map((id: string)  => "- <https://slice-deck.prismic.io/builder/pages/" + id + "?s=archived|" + id + ">\n") : undefined
     const fields = [
       publishedDocsText &&
       {
